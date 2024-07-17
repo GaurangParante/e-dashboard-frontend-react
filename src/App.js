@@ -6,6 +6,7 @@ import Signup from './componants/Signup';
 import PrivateComponant from './componants/PrivateComponant';
 import Login from './componants/Login';
 import AddProduct from './componants/AddProduct';
+import ProductList from './componants/ProductList';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route element={<PrivateComponant />}>
-            <Route path='/' element={<h1>Product Listing Componant</h1>} />
+            <Route path='/' element={<ProductList />} />
             <Route path='/add' element={<AddProduct />} />
             <Route path='/update' element={<h1>Update Product Componant</h1>} />
             <Route path='/logout' element={<h1>Logout Componant</h1>} />
