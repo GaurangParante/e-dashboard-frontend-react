@@ -10,6 +10,7 @@ const Navbar = () => {
     }
     return (
         <div>
+            <img className="logo" src="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg" alt="" />
             {
                 auth ?
                     <ul className="nav-ul">
@@ -17,7 +18,7 @@ const Navbar = () => {
                         <li><Link to="/add">Add Products</Link></li>
                         <li><Link to="/update">Update Products</Link></li>
                         <li><Link to="/profile">Profile</Link></li>
-                        <li><Link onClick={logout} to="/signup">Logout</Link></li>
+                        <li><Link onClick={logout} to="/login">Logout {JSON.parse(auth).name}</Link></li>
                     </ul> :
                     <ul className="nav-ul nav-right">
                         <li><Link to="/signup">Sign-up</Link></li>
