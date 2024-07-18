@@ -25,9 +25,25 @@ const ProductList = () => {
             getProducts();
         }
     }
+
+    const searchHandle = async (event) => {
+        // console.log(event.target.value)
+        let key = event.target.value;
+        if (key) {
+            let result = await fetch('http://localhost:5000/search/' + key);
+            result = await result.json();
+            if (result) {
+                setProducts(result)
+            }
+        } else {
+            getProducts();
+        }
+    }
+
     return (
         <div className="product-list">
             <h1>Product List</h1>
+            <input className="search-input" type="text" placeholder="Search Product Here" onChange={searchHandle} />
             <ul>
                 <li>S.no</li>
                 <li>Name</li>
@@ -37,7 +53,7 @@ const ProductList = () => {
                 <li>Action</li>
             </ul>
             {
-                products.map((item, index) =>
+                products.length ? products.map((item, index) =>
                     <ul key={item._id}>
                         <li>{index + 1}</li>
                         <li>{item.name}</li>
@@ -49,7 +65,7 @@ const ProductList = () => {
                             <Link to={"/update/" + item._id} ><button>Update</button></Link>
                         </li>
                     </ul>
-                )
+                ):<h3>No result found</h3>
             }
 
         </div>
