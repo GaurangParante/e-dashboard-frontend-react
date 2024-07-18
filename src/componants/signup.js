@@ -15,7 +15,7 @@ const Signup = () => {
     })
 
     const collectData = async () => {
-        console.warn(name, email, password);
+        // console.warn(name, email, password);
         let result = await fetch('http://localhost:5000/register', {
             method: 'POST',
             body: JSON.stringify({ name, email, password }),
@@ -24,8 +24,9 @@ const Signup = () => {
             }
         });
         result = await result.json();
-        console.log(result);
-        localStorage.setItem('user', JSON.stringify(result))
+        // console.log(result);
+        localStorage.setItem('user', JSON.stringify(result.result));
+        localStorage.setItem('auth', JSON.stringify(result.auth));
         navigate('/');
 
     }

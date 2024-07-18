@@ -9,7 +9,12 @@ const ProductList = () => {
     }, [])
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:5000/products');
+        // console.log(localStorage.getItem('auth'));
+        let result = await fetch('http://localhost:5000/products', {
+            headers: {
+                authorization: `bearer ${JSON.parse(localStorage.getItem('auth'))}`
+            }
+        });
         result = await result.json();
         setProducts(result);
     }
@@ -17,7 +22,10 @@ const ProductList = () => {
     const deleteProduct = async (id) => {
         // console.log(id)
         let result = await fetch('http://localhost:5000/product/' + id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${JSON.parse(localStorage.getItem('auth'))}`
+            }
         });
         result = await result.json();
 
@@ -30,7 +38,11 @@ const ProductList = () => {
         // console.log(event.target.value)
         let key = event.target.value;
         if (key) {
-            let result = await fetch('http://localhost:5000/search/' + key);
+            let result = await fetch('http://localhost:5000/search/' + key, {
+                headers: {
+                    authorization: `bearer ${JSON.parse(localStorage.getItem('auth'))}`
+                }
+            });
             result = await result.json();
             if (result) {
                 setProducts(result)
@@ -65,7 +77,7 @@ const ProductList = () => {
                             <Link to={"/update/" + item._id} ><button>Update</button></Link>
                         </li>
                     </ul>
-                ):<h3>No result found</h3>
+                ) : <h3>No result found</h3>
             }
 
         </div>

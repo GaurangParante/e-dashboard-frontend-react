@@ -21,9 +21,10 @@ const Login = () => {
             }
         })
         result = await result.json();
-        console.log(result);
-        if (result.name) {
-            localStorage.setItem('user', JSON.stringify(result));
+        // console.log(result);
+        if (result.auth) {
+            localStorage.setItem('user', JSON.stringify(result.user));
+            localStorage.setItem('auth', JSON.stringify(result.auth));
             navigate('/');
         } else {
             alert("Invalid Credentials");
